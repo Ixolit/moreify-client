@@ -38,11 +38,5 @@
 			"Ixolit\\Moreify\\": "./tests"
 		}
 	},
-	"repositories": [
-		{
-			"type": "path",
-			"url": "../moreify-client-http-guzzle"
-		}
-	],
 	"minimum-stability": "beta"
 }
