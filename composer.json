@@ -1,0 +1,47 @@
+{
+	"name": "ixolit/moreify-client",
+	"license": "MIT",
+	"type": "library",
+	"description": "Client library for the Moreify service",
+	"keywords": [
+		"sms", "call", "api"
+	],
+	"version": "1.0.0-beta1",
+	"support": {
+		"docs": "https://www.moreify.com/en/api",
+		"issues": "https://github.com/Ixolit/moreify-php-client/issues"
+	},
+	"require": {
+		"psr/http-message": "^1.0",
+		"psr/http-message-implementation": "^1.0",
+		"ixolit/moreify-client-http": "^1.0"
+	},
+	"suggest": {
+		"psr/log": "^1.0",
+		"psr/log-implementation": "^1.0",
+		"ixolit/moreify-client-http-guzzle": "^1.0"
+	},
+	"require-dev": {
+		"guzzlehttp/psr7": "^1.3",
+		"ixolit/moreify-client-http-guzzle": "^1.0",
+		"phpunit/phpunit": "^4.8",
+		"phpmd/phpmd": "^2.4",
+		"phing/phing": "^2.14"
+	},
+	"autoload": {
+		"psr-4": {
+			"Ixolit\\Moreify\\": "./src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Ixolit\\Moreify\\": "./tests"
+		}
+	},
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../moreify-client-http-guzzle"
+		}
+	]
+}
