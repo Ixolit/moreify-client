@@ -43,5 +43,6 @@
 			"type": "path",
 			"url": "../moreify-client-http-guzzle"
 		}
-	]
+	],
+	"minimum-stability": "beta"
 }
