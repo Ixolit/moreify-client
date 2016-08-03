@@ -147,7 +147,7 @@ class MoreifyClient {
 			'password' => $this->password,
 			'phonenumber' => (string)$recipient,
 			'language' => (string)$language,
-			'verifyCode' => (string)$verificationCode
+			'verifycode' => (string)$verificationCode
 		);
 		if ($tag) {
 			$payload['tag'] = $tag;
