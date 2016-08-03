@@ -131,7 +131,10 @@ class MoreifyClient {
 		}
 		$response = $this->sendRequest('POST', '/sendSms', $payload);
 
-		return new SendSMSResponse($response['success'], $response['message-identifier'], $response['tag']);
+		return new SendSMSResponse(
+			$response['success'],
+			$response['message-identifier'],
+			(isset($response['tag'])?$response['tag']:''));
 	}
 
 	public function verificationCall($recipient, $language, $verificationCode, $tag = '') {
@@ -155,7 +158,7 @@ class MoreifyClient {
 		return new VerificationCallResponse(
 			$response['success'],
 			$response['message-identifier'],
-			$response['tag']
+			(isset($response['tag'])?$response['tag']:'')
 		);
 	}
 
