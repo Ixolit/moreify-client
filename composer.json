@@ -6,7 +6,6 @@
 	"keywords": [
 		"sms", "call", "api"
 	],
-	"version": "1.0.0-beta1",
 	"support": {
 		"docs": "https://www.moreify.com/en/api",
 		"issues": "https://github.com/Ixolit/moreify-php-client/issues"
@@ -19,7 +18,8 @@
 	"suggest": {
 		"psr/log": "^1.0",
 		"psr/log-implementation": "^1.0",
-		"ixolit/moreify-client-http-guzzle": "^1.0"
+		"ixolit/moreify-client-http-guzzle": "^1.0",
+		"ixolit/moreify-client-http-httplug": "^1.0"
 	},
 	"require-dev": {
 		"guzzlehttp/psr7": "^1.3",
