@@ -11,6 +11,7 @@ use Ixolit\Moreify\Exceptions\InvalidAuthenticationTokenException;
 use Ixolit\Moreify\Exceptions\InvalidMessageException;
 use Ixolit\Moreify\Exceptions\InvalidPhoneNumberException;
 use Ixolit\Moreify\Exceptions\InvalidTagException;
+use Ixolit\Moreify\Exceptions\UrlsNotAllowedException;
 use Ixolit\Moreify\Interfaces\HTTPClientAdapter;
 use Ixolit\Moreify\Responses\SendSMSResponse;
 use Ixolit\Moreify\Responses\VerificationCallResponse;
@@ -61,7 +62,7 @@ class MoreifyClient {
 		$uri = $this->httpClient
 			->createUri()
 			->withScheme('https')
-			->withHost('members.moreify.com')
+			->withHost('mapi.moreify.com')
 			->withPath('/api/v1' . $urlFragment);
 		$request = $this->httpClient->createRequest()
 			->withUri($uri)
@@ -96,6 +97,12 @@ class MoreifyClient {
 				case 1202:
 				case 1203:
 					throw new InvalidPhoneNumberException($payload['phonenumber'], $responseData['errorCode']);
+				case 1204:
+					throw new InvalidLanguageException($payload['language'], $responseData['errorCode']);
+				case 1205:
+					throw new InvalidVerificationCodeException($payload['verifycode'], $responseData['errorCode']);
+				case 1209:
+					throw new UrlsNotAllowedException($payload['message'], $responseData['errorDetails'], $responseData['errorCode']);
 				default:
 					throw new ApiCallFailedException($responseData['errorMessage'], $responseData['errorCode']);
 			}
@@ -112,10 +119,13 @@ class MoreifyClient {
 	 * @param string $tag       String which allows you to tag this specific message. E.g. an unique identifier from
 	 *                          your side or some sort of grouping information, like a specific promotion id,
 	 *                          name ... It gets returned in the response.
+	 * @param string $verificationCode
+	 * 				 The 4 digit code used for verification if this is a 2FA sms
+	 *
 	 *
 	 * @return SendSMSResponse
 	 */
-	public function sendSMS($recipient, $message, $tag = '') {
+	public function sendSMS($recipient, $message, $tag = '', $verificationCode=null) {
 		$this->validatePhoneNumber($recipient);
 		$this->validateMessage($message);
 		$this->validateTag($tag);
@@ -126,8 +136,14 @@ class MoreifyClient {
 			'phonenumber' => (string)$recipient,
 			'message' => (string)$message,
 		);
+
 		if ($tag) {
 			$payload['tag'] = $tag;
+		}
+
+		if ($verificationCode) {
+			$this->validateVerificationCode($verificationCode);
+			$payload['verifycode'] = $verificationCode;
 		}
 		$response = $this->sendRequest('POST', '/sendSms', $payload);
 
