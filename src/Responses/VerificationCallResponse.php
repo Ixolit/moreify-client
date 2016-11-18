@@ -11,7 +11,7 @@ class VerificationCallResponse {
 	 */
 	private $success;
 	/**
-	 * @var
+	 * @var string
 	 */
 	private $messageIdentifier;
 	/**

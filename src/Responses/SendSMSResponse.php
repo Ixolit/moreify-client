@@ -15,12 +15,12 @@ class SendSMSResponse {
 	 */
 	private $tag;
 	/**
-	 * @var string
+	 * @var boolean
 	 */
 	private $success;
 
 	/**
-	 * @param string $success
+	 * @param boolean $success
 	 * @param string $messageIdentifier
 	 * @param string $tag
 	 */
@@ -31,7 +31,7 @@ class SendSMSResponse {
 	}
 
 	/**
-	 * @return string
+	 * @return boolean
 	 */
 	public function getSuccess() {
 		return $this->success;

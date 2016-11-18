@@ -15,7 +15,7 @@ class InvalidPhoneNumberException extends \InvalidArgumentException implements M
 
 	public function __construct($phoneNumber, \Exception $previous = null) {
 		parent::__construct(
-			'Invalid phone number. Phone numbers should be in the international format: 00123456789.' .
+			'Invalid phone number. Phone numbers should be in the international format starting with "+" or "00".' .
 			'The phone number passed was: ' . \var_export($phoneNumber),
 			1203,
 			$previous
