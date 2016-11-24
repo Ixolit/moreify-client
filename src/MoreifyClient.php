@@ -272,14 +272,18 @@ class MoreifyClient {
 	}
 
 	/**
-	 * Initiate Two Factor Authentication by sending a random code to the recipient
+	 * Initiate Two Factor Authentication
+	 * Depending on the $language specified the translated text:
+	 * 'Your verification code is VERIFYCODE.'
+	 * will be sent to the $recipient, where VERIFYCODE will be replaced by a generated random 4 digit number.
 	 *
 	 * @param string $recipient Phone number in international format (00123456789)
-	 * @param string $language  Needed to choose message text
+	 * @param string $language  de|es|fr|nl|tr
 	 * @param string $type      Type of message (SMS, call)
 	 * @param string $tag       String which allows you to tag this specific message. E.g. an unique identifier from
 	 *                          your side or some sort of grouping information, like a specific promotion id,
 	 *                          name ... It gets returned in the response.
+	 *
 	 *
 	 * @return SendSMSResponse
 	 */
@@ -308,7 +312,9 @@ class MoreifyClient {
 	}
 
 	/**
-	 * Complete Two Factor Authentication by passing the random code sent to the recipient previously
+	 * Complete Two Factor Authentication by checking the customer entered verifyCode through this API call
+	 * If the entered verifyCode matches the stored auto generated code,
+	 * ConfirmResponse->isSuccess() is going to return true, false otherwise
 	 *
 	 * @param string $messageIdentifier message to confirm, returned by send2fa
 	 * @param string $verifyCode code sent to and entered by recipient
