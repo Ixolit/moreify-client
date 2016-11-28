@@ -26,13 +26,21 @@ class WebhookEndpoint {
 	private $secret;
 
 	/**
+	 * whether or not to enable/disable validation of request signature check
+	 * @var boolean
+	 */
+	private $validate = true;
+
+	/**
 	 * WebhookEndpoint constructor.
 	 * @param string $id
 	 * @param string $secret
+	 * @param boolean $validate
 	 */
-	public function __construct($id, $secret) {
+	public function __construct($id, $secret, $validate=true) {
 		$this->setId($id);
 		$this->setSecret($secret);
+		$this->setValidate($validate);
 	}
 
 	/**
@@ -100,6 +108,23 @@ class WebhookEndpoint {
 		}
 
 		$this->secret = $secret;
+
+		return $this;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function shallValidate() {
+		return $this->validate;
+	}
+
+	/**
+	 * @param boolean $validate
+	 * @return $this
+	 */
+	public function setValidate($validate) {
+		$this->validate = (bool) $validate;
 
 		return $this;
 	}

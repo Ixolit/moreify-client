@@ -90,9 +90,14 @@ class WebhookHandler implements WebhookHandlerInterface {
 	 * @param string $content
 	 * @param string $algo
 	 * @param string $hmac
+	 * @return boolean
 	 * @throws InvalidSignatureException
 	 */
-	private function validate($endpoint, $url, $content, $algo, $hmac) {
+	private function validate(WebhookEndpoint $endpoint, $url, $content, $algo, $hmac) {
+
+		if (!$endpoint->shallValidate()) {
+			return false;
+		}
 
 		if (!strlen($hmac)) {
 			throw new InvalidSignatureException("The provided hmac may not be empty!");
@@ -108,6 +113,7 @@ class WebhookHandler implements WebhookHandlerInterface {
 			throw new InvalidSignatureException("Calculated($algo): $signature Expected($algo): $hmac");
 		}
 
+		return true;
 	}
 
 	/**

@@ -5,7 +5,9 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 //create handler and assign at least one webhook endpoint
 //the same script could handle multiple endpoints
 $handler = new \Ixolit\Moreify\Webhook\WebhookHandler();
-$handler->addWebhookEndpoint(new \Ixolit\Moreify\Webhook\WebhookEndpoint('ENDPOINT-ID', 'ENDPOINT-SECRET'));
+
+$shallValidateSignature = true;
+$handler->addWebhookEndpoint(new \Ixolit\Moreify\Webhook\WebhookEndpoint('ENDPOINT-ID', 'ENDPOINT-SECRET', $shallValidateSignature));
 
 $client = new \Ixolit\Moreify\MoreifyClient('PROJECT-IDENTIFIER', 'PROJECT-SECRET');
 $client->setWebhookHandler($handler);
