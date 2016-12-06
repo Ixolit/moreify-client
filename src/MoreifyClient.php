@@ -151,7 +151,7 @@ class MoreifyClient {
 					throw new InvalidMessageException($payload['message'], $responseData['errorCode']);
 				case 1202:
 				case 1203:
-					throw new InvalidPhoneNumberException($payload['phonenumber'], $responseData['errorCode']);
+					throw new InvalidPhoneNumberException($payload['phonenumber']);
 				case 1204:
 					throw new InvalidLanguageException($payload['language'], $responseData['errorCode']);
 				case 1205:
